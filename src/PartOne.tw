@@ -1,0 +1,279 @@
+:: Start
+You are a prisoner being transferred back to your home kingdom. A lone soldier is assigned to make sure you reach your destination.
+
+[[Begin. | Prologue]]
+
+:: Prologue
+You wake—
+
+To pitch black darkness and rough woollen bed sheets. Your face itches. Your head of hair seems indistinguishable from the pile of straw underneath. 
+
+The tent above you sways in the young winter wind.
+
+[[Look around. | PrologueP2]]
+
+:: PrologueP2
+
+A man sat facing the tent opening, watching it flap around in the breeze. His grey coat is covering his head. The muzzle of his musket rifle peeks from his shoulder as he is hugging it close.
+
+[[...Is he sleeping? | PrologueP2-A][$closeness to $closeness+1]]
+[[Forget it. | PrologueP3]]
+
+:: PrologueP2-A
+
+You poked the soldier’s back. Of course he is not sleeping. He turns around and stares at you inquisitively.
+
+You and he speak a different language. You shake your head and point to the bed. “Nothing. Are you not going to sleep?”
+
+He watches your gestures. He peeks outside the tent opening and shows you the sky. “Almost morning.”
+
+[[Wait. Is it really? | PrologueP3]]
+
+:: PrologueP3
+
+You crawl past the soldier, desperate to look outside. A blast of cold wind hits your face and wouldn’t you know it, gradients of red and yellow paint the sky above the massive grassland. It is almost morning.
+
+[[What happens on earth, stays on earth. | Chapter1]]
+
+:: Chapter1
+<center><h1>Chapter 1</h1></center>
+
+[[Begin. | Chapter1P1]]
+
+:: Chapter1P1
+
+The soldier skillfully disassembled the military tent, tied the materials all up into one bundle.
+
+He attaches it onto his already hefty looking pack. You pull up your comparatively puny rucksack. Inside it is a small amount of food and a waterskin. Upon releasing you they gave you nothing else, not even a coat.
+
+You wrap around the scratchy woollen blanket around you. You are ready to go.
+
+[[Look around. | Chapter1P2]]
+
+:: Chapter1P2
+
+Just a dry, vast steppe. Nothing but weeds and dull coloured hills as far as the eyes can see. You’ve walked a day on it and you’ve seen it all. But it’s not even a quarter of the journey.
+
+Wind sweeps brazenly through the blades of grass. 
+
+[[It’s terrible. | Chapter1P3]]
+
+:: Chapter1P3
+
+Chills went through your body. You probably won’t last long without a proper coat. The wind has nothing to catch itself on, so it could almost blow you off your feet. 
+
+Looking up, the steppe is truly waving. The herbs growing around the land gives the air an odd scent of sweetness. It’s making you dizzy.
+
+[[Walk. | Chapter1P4]]
+
+:: Chapter1P4
+
+The ground groaned against our feet. The sun is rising from the horizon. We are heading east, always east. East to the small kingdom of Rhodolite.
+
+[[Walk. | Chapter1P5]]
+
+:: Chapter1P5
+
+It’s lonely out here. Even though you’ve been given your company.
+
+You watch the soldier casually picking herbs up off the ground as he walks. He seems to know what he’s looking for. Knew this neverending grassland like the back of his hand. You're perhaps quite lucky to have him. 
+
+The soldier is most likely not an Obsidianite. Darker skin, eyes. He’s one of the natives of the steppe. Probably here against his will.
+
+[[Ask about his name. | Chapter1P5-A][$closeness to $closeness+1]]
+[[Should let him do his thing. | Chapter1P6]]
+
+:: Chapter1P5-A
+
+Yes, you never caught his name. And since you were first thrown out into this— what seems to effectively be a— purgatory, you never really thought to ask about that stuff.
+
+“What was it again, your name?” You started. For someone as talkative as you, your voice sounds strained, and awkward.
+
+He glanced back with no discernible expression. “Nama?”
+
+You nod.
+
+“Adam.” Ah-dahm.
+
+[[Great name. | Chapter1P5-A1]]
+<!--(Change the profile text from ‘the soldier’ to ‘Adam.’)-->
+<<set $Adam to "Adam">>
+
+:: Chapter1P5-A1
+
+“Adam, where are you from?”
+
+You understand each other better than you had expected. Adam tiredly gestures to the space around them, like saying, ‘from around here.’ And also, 'as you've probably guessed.'
+
+You sigh. "Yeah, sorry. I'm missing a lot of things right now. You'd have to bear with me."
+
+For a moment he stopped, and looked at you. 
+
+[[Bit disoriented. But it's all good. | Chapter1P5-A2]]
+[[I don't remember anything.| Chapter1P5-A2][$closeness to $closeness+1]]
+
+:: Chapter1P5-A2
+
+You drop your face into your hand. You've been out here for a whole day, yet you're still all over the place. Whenever you try a little at remembering, you remember a little of—
+
+being held inside a dark room for weeks, maybe months, maybe longer. You remember being between the stone ceiling and a cold floor. You remember your first sunlight yesterday. You don't really know anything else. 
+
+You grin towards the soldier. 
+
+[[Nevermind it. Let's keep going. | Chapter1P6]]
+[[Do *you* know anything, maybe? | Chapter1P5-A3][$closeness to $closeness+1]] 
+
+:: Chapter1P5-A3
+
+<!--CLOSENESS CHECK!-->
+<!--(if greater than equal 4)-->
+
+<<if $closeness gte 4>> 
+
+(check successful)
+
+The soldier frowns, his gaze turns towards the ground. 
+
+You can't see his face. There seems to be a lump in his throat that prevents him from speaking. He takes a while to respond. 
+
+"I don't know anything."
+
+There is definitely something that he knows. But you won't blame him too much for hiding. 
+
+    <<else>> 
+    
+The soldier frowns, his gaze turns towards the ground. 
+
+You can't see his face. But he shakes his head. 
+
+"I just have to bring you across."
+
+ <</if>>
+
+[[Walk. | Chapter1P6]]
+
+:: Chapter1P6
+
+He took one last look at you before continuing. 
+
+$Adam carries a fistful of herbs in his hands now. He’s holding on to it real tight like it’s the only thing that could save him. You watch him skillfully tie all the stems up into one bale with a string.
+
+[[Walk. | Chapter1P7]]
+
+:: Chapter1P7
+
+$Adam took a short detour to the right to dig up some more off the ground. Now, you're almost unable to contain your curiosity. 
+
+[[What is it for? | Chapter1P7-A][$closeness to $closeness+1]]
+[[Just keep on walking, dammit. | Chapter1P8]]
+
+:: Chapter1P7-A
+
+You point to the herbs.
+
+“It’s for drinking," he said. 
+
+"What'd you do with it, you boil it? Like tea?" 
+
+He seems confused that you're asking all this all of a sudden. Perhaps because you've been silent this whole time. 
+
+"Just want to talk… Are you told not to do that?" You chuckle. "I don't bite. I'm barely awake as it is."
+
+[["Do you deliver prisoners often?" | Chapter1P7-A1][$closeness to $closeness+1]]
+[[Better stop talking before you say something ridiculous. |  Chapter1P8]]
+
+::  Chapter1P7-A1
+
+"Because I'm not… going to be your run-of-the-mill. I've never fought a single fight in my life." 
+
+It's half true. There's a reason you end up here in the first place. 
+
+"I'm just looking to know what's going on. I'll be as docile as I can. It's quite hopeless trying to run away here isn't it." You look around you, watching the blades of grass stabbing through the earth below your boots.
+ 
+[[So, you can just chill around me. |  Chapter1P7-A2]] 
+
+:: Chapter1P7-A2
+
+"No. Not often. This is the first time." He said. 
+
+Quite to the point. He ignored everything else that you just said. 
+
+"Alright, fine. So you're not looking for trouble. Good luck for your first time."
+
+[[That's ridiculous, what you just said. | Chapter1P8]]
+
+:: Chapter1P8
+
+"We have to be quick." $Adam widened his strides. He rights up his backpack and stomps the ground more confidently. He hugs his rifle close to his shoulder. "This is not a safe area."
+
+"Could've told me that a minute ago!" You ran to catch up with him. "What's the danger?" 
+
+He looks at you incredulously once more. 
+
+[[What? Call me stupid, but I need to know. | Chapter1P8-A][$closeness to $closeness+1]] 
+[[Alright, then I'm not going to ask. | Chapter1P9]]
+
+:: Chapter1P8-A
+
+"There's nowhere to hide. Anyone can see us easily."
+
+You walk closer to him to whisper, "What does anyone want from us?" 
+
+He looks so done with your questions now. 
+
+"Look, friend, I really don't know anything. It's all empty up here. But you know what, I can still guess." You took a deep breath, and let everything out from your body. "Someone still wants to kill me."
+
+He doesn't answer. There's that lump in his throat again. 
+
+Something is really tearing him up inside, but you can't tell what. 
+
+[[Walk. | Chapter1P9]]
+
+:: Chapter1P9
+
+"No matter what, we get up that hill."
+
+$Adam points towards a hump in the land that is barely a hill. But at least it's something different. 
+
+"And we'll see what's ahead of us."
+
+You wrap your blanket tighter around you. Just one slip and it might get flown off by the wind, and if that happens, good luck trying to differentiate it from the grass. 
+
+[[Walk. | Chapter1P10]] 
+
+:: Chapter1P10
+
+This wool is just really really terrible isn't it. Sticking it over hay had just made it worse. 
+
+[[Walk. | Chapter1P11]]
+
+:: Chapter1P11
+
+You really need a coat. And maybe some more rest. 
+
+[[Walk. | Chapter1P12]]
+
+:: Chapter1P12
+
+The hill just gets further and further away. 
+
+[[Walk. | Chapter2]]
+
+:: Chapter2
+
+<center><h1>CHAPTER 2</h1></center> 
+<!--max points here is 7-->
+Your points: $closeness
+Keep being curious, by everything and everyone, no matter what. 
+
+
+
+<<if $closeness gte 4>> 
+
+Profile updated. 
+
+<</if>>
+
+<<set $statusYou to "cold">>
+
+[[Begin.]]

@@ -1,0 +1,29 @@
+Twee to HTML
+    Put all code files in the 'src' folder (.tw, .js, .css)
+    Open the terminal (CTRL + ~ or View->Terminal)
+    Make sure it is on the 'cmd' prompt (+ icon to change)
+    Copy/paste/enter: 
+        call tweego -l -o export/index.html src 
+    OR 
+        build
+    The file will appear in the 'export' folder
+
+Twee to HTML(debug)
+    Put all code files in the 'src' folder (.tw, .js, .css)
+    Open the terminal (CTRL + ~ or View->Terminal)
+    Make sure it is on the 'cmd' prompt (+ icon to change)
+    Copy/paste/enter: 
+        call tweego -t -l -o export/Debug.index.html src 
+    OR 
+        debug
+    The file will appear in the 'export' folder
+
+HTML to Twee
+    Put the HTML file in the Mother Folder (where tweego.exe is located)
+    Rename is 'test.html'
+    Open the terminal (CTRL + ~ or View->Terminal)
+    Copy/paste/enter: 
+        call tweego -d test.html -o src/test.tw src 
+    OR 
+        decompile
+    The file will appear in the 'src' folder

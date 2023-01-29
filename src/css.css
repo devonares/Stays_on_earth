@@ -1,0 +1,16 @@
+#ui-bar {
+}
+
+@font-face {
+    font-family: "FreePixel";
+    src: url("https://sadhost.neocities.org/fonts/FreePixel.ttf") format("truetype");
+}
+
+body {
+	margin: auto;
+    font-family: "FreePixel";
+}
+
+.passage {
+    font-size: large;
+}

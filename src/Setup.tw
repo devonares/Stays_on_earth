@@ -1,0 +1,83 @@
+:: StoryTitle
+what happens on earth, stays on earth
+
+:: StoryData
+{
+	"ifid": "6BFC2656-0553-4EC7-B305-79D5E1B5F52F", 
+	"format": "SugarCube",
+	"format-version": "2.34.1",
+	"start": "Start"}
+
+:: StoryBanner
+<!--<img src="nokto sprite.png" style="width: 250px">-->
+
+:: StorySubtitle
+
+
+:: StoryAuthor
+by [[Devon R|https://batteryrose.tumblr.com/]]
+
+:: StoryCaption
+
+:: StoryMenu
+
+:: PassageFooter
+<div id="passage-footer">
+<hr>
+[[You | Profile Page]]
+[["" + $Adam | Soldier's Profile]]
+</div>
+
+
+
+:: PassageHeader
+
+
+:: StoryInit
+<!-- your starting variable -->
+<<set $closeness to 0>>
+<<set $statusYou to "getting by">>
+<<set $statusSoldier to "getting by">>
+<<set $Adam to "The Soldier">>
+
+
+
+
+
+
+
+:: Profile Page  [noreturn]
+<img src="nokto sprite.png">
+
+<<if $closeness gte 4>> 
+
+You are a Prince of Rhodolite, captured in the middle of a diplomatic mission. You don't really remember what they've done to you, or anything, really.
+
+<<else>>
+
+You are a Prince of Rhodolite, captured in the middle of a diplomatic mission.
+
+<</if>>
+
+
+Status: $statusYou.
+
+<<link "Return" $return>><</link>>
+
+:: Soldier's Profile  [noreturn]
+<img src="adam sprite.png">
+
+<<if $closeness gte 4>> 
+
+An Obsidian soldier tasked to carry out the prisoners exchange. He might be hiding something from you.
+
+<<else>>
+
+An Obsidian soldier tasked to carry out the prisoners exchange.
+
+<</if>>
+
+Status: $statusSoldier.
+
+<<link "Return" $return>><</link>>
+
