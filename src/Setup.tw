@@ -1,35 +1,27 @@
-<!--TODO:
-1. Use github actions to deploy.
-2. Change profile desc to a variable so it's easier to change
-3. Fix one of the branching mistakes (when Nokto says 'i dont remember anything')
-4. Write chapter two
--->
-
-
-:: StoryTitle
+:: StoryTitle {"position":"0,500"}
 what happens on earth, stays on earth
 
-:: StoryData
+:: StoryData {"position":"0,1000"}
 {
 	"ifid": "6BFC2656-0553-4EC7-B305-79D5E1B5F52F", 
 	"format": "SugarCube",
 	"format-version": "2.34.1",
 	"start": "Start"}
 
-:: StoryBanner
+:: StoryBanner {"position":"0,900"}
 <!--<img src="nokto sprite.png" style="width: 250px">-->
 
-:: StorySubtitle
+:: StorySubtitle {"position":"0,600"}
 
 
-:: StoryAuthor
+:: StoryAuthor {"position":"0,700"}
 by [[Devon R|https://batteryrose.tumblr.com/]]
 
-:: StoryCaption
+:: StoryCaption {"position":"0,800"}
 
-:: StoryMenu
+:: StoryMenu {"position":"0,1100"}
 
-:: PassageFooter
+:: PassageFooter {"position":"0,200"}
 <div id="passage-footer">
 <hr>
 [[You | Profile Page]]
@@ -38,52 +30,34 @@ by [[Devon R|https://batteryrose.tumblr.com/]]
 
 
 
-:: PassageHeader
+:: PassageHeader {"position":"0,100"}
 
 
 :: StoryInit
+<<preload "nokto sprite.png" "adam sprite.png">>
 <!-- your starting variable -->
 <<set $closeness to 0>>
+<<set $checkAmount to 0>>
 <<set $statusYou to "getting by">>
 <<set $statusSoldier to "getting by">>
-<<set $Adam to "The Soldier">>
+<<set $Adam to "the Soldier">>
+<<set $descYou to "You are a Prince of Rhodolite, captured in the middle of a diplomatic mission.">>
+<<set $descSoldier to "An Obsidian soldier tasked to carry out the prisoners exchange.">>
 
 
-
-
-
-
-
-:: Profile Page  [noreturn]
+:: Profile Page [noreturn] {"position":"0,375"}
 <img src="nokto sprite.png">
 
-<<if $closeness gte 4>> 
-
-You are a Prince of Rhodolite, captured in the middle of a diplomatic mission. You don't really remember what they've done to you, or anything, really.
-
-<<else>>
-
-You are a Prince of Rhodolite, captured in the middle of a diplomatic mission.
-
-<</if>>
-
+$descYou
 
 Status: $statusYou.
 
 <<link "Return" $return>><</link>>
 
-:: Soldier's Profile  [noreturn]
+:: Soldier's Profile [noreturn] {"position":"100,375"}
 <img src="adam sprite.png">
 
-<<if $closeness gte 4>> 
-
-An Obsidian soldier tasked to carry out the prisoners exchange. He might be hiding something from you.
-
-<<else>>
-
-An Obsidian soldier tasked to carry out the prisoners exchange.
-
-<</if>>
+$descSoldier
 
 Status: $statusSoldier.
 

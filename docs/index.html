@@ -113,6 +113,10 @@ body {
 
 .passage {
     font-size: large;
+}
+
+.hints {
+    color: rgb(158, 158, 158);
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">//--Not necessary if you use the base UI, but you can put Javascript here if you want
 //--If you want to have settings, this is where you will put the code
 
@@ -122,51 +126,111 @@ $(document).on(':passagestart', function (ev) {
         State.variables.return = ev.passage.title;
     }
 });
-// end noreturn</script><tw-passagedata pid="1" name="Start" tags="" position="100,100" size="100,100">You are a prisoner being transferred back to your home kingdom. A lone soldier is assigned to make sure you reach your destination.
+// end noreturn
 
-[[Begin. | Prologue]]</tw-passagedata><tw-passagedata pid="2" name="Prologue" tags="" position="225,100" size="100,100">You wake—
+(function () {
+    'use strict';
+    // v1.0.0
+    // preload images prior to story startup
+
+    function preloadImage (url, cb) {
+        var img = new Image();
+        img.onload = cb;
+        img.onerror = cb;
+        img.src = url;
+    }
+
+    function preloadAll (urls, cb) {
+        var loaded = 0;
+        var toBeLoaded = urls.length;
+        if (toBeLoaded === 0) {
+            throw new Error("No URLs to preload!");
+        }
+        urls.forEach( function (url) {
+            preloadImage( url, function () {
+                loaded++;
+                if (loaded === toBeLoaded) {
+                    cb();
+                }
+            });
+        });
+    }
+
+    function isInit () {
+        return State.length <= 0;
+    }
+
+
+    function preload () {
+        var list = [].slice.call(arguments).flatten();
+        var id = isInit() ? LoadScreen.lock() : false;
+        preloadAll( list, function () {
+            if (id) {
+                LoadScreen.unlock(id);
+            }
+        });
+        return id;
+    }
+
+    setup.preload = preload;
+    setup.preload.force = false;
+
+    /* <<preload imageUrls...>> */
+    Macro.add('preload', {
+        handler : function () {
+            if (!isInit() && !setup.preload.force) {
+                return this.error("Attempting to preload images outside of `StoryInit` or similar can cause performance issues. Set `setup.preload.force` to `true` if you want to do it anyway.");
+            }
+            preload(this.args.flatten().filter( function (url) {
+                return typeof url === 'string';
+            }));
+        }
+    });
+}());</script><tw-passagedata pid="1" name="Start" tags="" position="500,0" size="100,100">You are a prisoner being transferred back to your home kingdom. A lone soldier is assigned to make sure you reach your destination.
+
+[[Begin. | Prologue]]</tw-passagedata><tw-passagedata pid="2" name="Prologue" tags="" position="500,175" size="100,100">You wake—
 
 To pitch black darkness and rough woollen bed sheets. Your face itches. Your head of hair seems indistinguishable from the pile of straw underneath. 
 
 The tent above you sways in the young winter wind.
 
-[[Look around. | PrologueP2]]</tw-passagedata><tw-passagedata pid="3" name="PrologueP2" tags="" position="350,100" size="100,100">A man sat facing the tent opening, watching it flap around in the breeze. His grey coat is covering his head. The muzzle of his musket rifle peeks from his shoulder as he is hugging it close.
+[[Look around. | PrologueP2]]</tw-passagedata><tw-passagedata pid="3" name="PrologueP2" tags="" position="600,175" size="100,100">A man sat facing the tent opening, watching it flap around in the breeze. His grey coat is covering his head. The muzzle of his musket rifle peeks from his shoulder as he is hugging it close.
 
 [[...Is he sleeping? | PrologueP2-A][$closeness to $closeness+1]]
-[[Forget it. | PrologueP3]]</tw-passagedata><tw-passagedata pid="4" name="PrologueP2-A" tags="" position="475,100" size="100,100">You poked the soldier’s back. Of course he is not sleeping. He turns around and stares at you inquisitively.
+[[Forget it. | PrologueP3]]</tw-passagedata><tw-passagedata pid="4" name="PrologueP2-A" tags="" position="500,325" size="100,100">You poked the soldier’s back. Of course he is not sleeping. He turns around and stares at you inquisitively.
 
 You and he speak a different language. You shake your head and point to the bed. “Nothing. Are you not going to sleep?”
 
 He watches your gestures. He peeks outside the tent opening and shows you the sky. “Almost morning.”
 
-[[Wait. Is it really? | PrologueP3]]</tw-passagedata><tw-passagedata pid="5" name="PrologueP3" tags="" position="600,100" size="100,100">You crawl past the soldier, desperate to look outside. A blast of cold wind hits your face and wouldn’t you know it, gradients of red and yellow paint the sky above the massive grassland. It is almost morning.
+[[Wait. Is it really? | PrologueP3]]</tw-passagedata><tw-passagedata pid="5" name="PrologueP3" tags="" position="675,325" size="100,100">You crawl past the soldier, desperate to look outside. A blast of cold wind hits your face and wouldn’t you know it, gradients of red and yellow paint the sky above the massive grassland. It is almost morning.
 
-[[What happens on earth, stays on earth. | Chapter1]]</tw-passagedata><tw-passagedata pid="6" name="Chapter1" tags="" position="725,100" size="100,100">&lt;center&gt;&lt;h1&gt;Chapter 1&lt;/h1&gt;&lt;/center&gt;
+[[What happens on earth, stays on earth. | Chapter1]]</tw-passagedata><tw-passagedata pid="6" name="Chapter1" tags="" position="500,475" size="100,100">&lt;center&gt;&lt;h1&gt;Chapter 1&lt;/h1&gt;&lt;/center&gt;
 
-[[Begin. | Chapter1P1]]</tw-passagedata><tw-passagedata pid="7" name="Chapter1P1" tags="" position="850,100" size="100,100">The soldier skillfully disassembled the military tent, tied the materials all up into one bundle.
+[[Begin. | Chapter1P1]]</tw-passagedata><tw-passagedata pid="7" name="Chapter1P1" tags="" position="275,625" size="100,100">The soldier skillfully disassembled the military tent, tied the materials all up into one bundle.
 
 He attaches it onto his already hefty looking pack. You pull up your comparatively puny rucksack. Inside it is a small amount of food and a waterskin. Upon releasing you they gave you nothing else, not even a coat.
 
 You wrap around the scratchy woollen blanket around you. You are ready to go.
 
-[[Look around. | Chapter1P2]]</tw-passagedata><tw-passagedata pid="8" name="Chapter1P2" tags="" position="975,100" size="100,100">Just a dry, vast steppe. Nothing but weeds and dull coloured hills as far as the eyes can see. You’ve walked a day on it and you’ve seen it all. But it’s not even a quarter of the journey.
+[[Look around. | Chapter1P2]]</tw-passagedata><tw-passagedata pid="8" name="Chapter1P2" tags="" position="400,625" size="100,100">Just a dry, vast steppe. Nothing but weeds and dull coloured hills as far as the eyes can see. You’ve walked a day on it and you’ve seen it all. But it’s not even a quarter of the journey.
 
 Wind sweeps brazenly through the blades of grass. 
 
-[[It’s terrible. | Chapter1P3]]</tw-passagedata><tw-passagedata pid="9" name="Chapter1P3" tags="" position="1100,100" size="100,100">Chills went through your body. You probably won’t last long without a proper coat. The wind has nothing to catch itself on, so it could almost blow you off your feet. 
+[[It’s terrible. | Chapter1P3]]</tw-passagedata><tw-passagedata pid="9" name="Chapter1P3" tags="" position="525,625" size="100,100">Chills went through your body. You probably won’t last long without a proper coat. The wind has nothing to catch itself on, so it could almost blow you off your feet. 
 
 Looking up, the steppe is truly waving. The herbs growing around the land gives the air an odd scent of sweetness. It’s making you dizzy.
 
-[[Walk. | Chapter1P4]]</tw-passagedata><tw-passagedata pid="10" name="Chapter1P4" tags="" position="1225,100" size="100,100">The ground groaned against our feet. The sun is rising from the horizon. We are heading east, always east. East to the small kingdom of Rhodolite.
+[[Walk. | Chapter1P4]]</tw-passagedata><tw-passagedata pid="10" name="Chapter1P4" tags="" position="650,625" size="100,100">The ground groaned against our feet. The sun is rising from the horizon. We are heading east, always east. East to the small kingdom of Rhodolite.
 
-[[Walk. | Chapter1P5]]</tw-passagedata><tw-passagedata pid="11" name="Chapter1P5" tags="" position="100,225" size="100,100">It’s lonely out here. Even though you’ve been given your company.
+[[Walk. | Chapter1P5]]</tw-passagedata><tw-passagedata pid="11" name="Chapter1P5" tags="" position="775,625" size="100,100">It’s lonely out here. Even though you’ve been given your company.
 
 You watch the soldier casually picking herbs up off the ground as he walks. He seems to know what he’s looking for. Knew this neverending grassland like the back of his hand. You&#39;re perhaps quite lucky to have him. 
 
 The soldier is most likely not an Obsidianite. Darker skin, eyes. He’s one of the natives of the steppe. Probably here against his will.
 
 [[Ask about his name. | Chapter1P5-A][$closeness to $closeness+1]]
-[[Should let him do his thing. | Chapter1P6]]</tw-passagedata><tw-passagedata pid="12" name="Chapter1P5-A" tags="" position="225,225" size="100,100">Yes, you never caught his name. And since you were first thrown out into this— what seems to effectively be a— purgatory, you never really thought to ask about that stuff.
+[[Should let him do his thing. | Chapter1P6]]</tw-passagedata><tw-passagedata pid="12" name="Chapter1P5-A" tags="" position="300,775" size="100,100">Yes, you never caught his name. And since you were first thrown out into this— what seems to effectively be a— purgatory, you never really thought to ask about that stuff.
 
 “What was it again, your name?” You started. For someone as talkative as you, your voice sounds strained, and awkward.
 
@@ -178,7 +242,7 @@ You nod.
 
 [[Great name. | Chapter1P5-A1]]
 &lt;!--(Change the profile text from ‘the soldier’ to ‘Adam.’)--&gt;
-&lt;&lt;set $Adam to &quot;Adam&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="Chapter1P5-A1" tags="" position="350,225" size="100,100">“Adam, where are you from?”
+&lt;&lt;set $Adam to &quot;Adam&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="Chapter1P5-A1" tags="" position="425,775" size="100,100">“Adam, where are you from?”
 
 You understand each other better than you had expected. Adam tiredly gestures to the space around them, like saying, ‘from around here.’ And also, &#39;as you&#39;ve probably guessed.&#39;
 
@@ -186,20 +250,25 @@ You sigh. &quot;Yeah, sorry. I&#39;m missing a lot of things right now. You&#39;
 
 For a moment he stopped, and looked at you. 
 
-[[Bit disoriented. But it&#39;s all good. | Chapter1P5-A2]]
-[[I don&#39;t remember anything.| Chapter1P5-A2][$closeness to $closeness+1]]</tw-passagedata><tw-passagedata pid="14" name="Chapter1P5-A2" tags="" position="475,225" size="100,100">You drop your face into your hand. You&#39;ve been out here for a whole day, yet you&#39;re still all over the place. Whenever you try a little at remembering, you remember a little of—
+[[Bit disoriented. But it&#39;s all good. | Chapter1P6]]
+[[(be honest) I don&#39;t remember anything.| Chapter1P5-A2][$closeness to $closeness+1]]</tw-passagedata><tw-passagedata pid="14" name="Chapter1P5-A2" tags="" position="550,775" size="100,100">You drop your face into your hand. You&#39;ve been out here for a whole day, yet you&#39;re still all over the place. Whenever you try a little at remembering, you remember a little of—
 
 being held inside a dark room for weeks, maybe months, maybe longer. You remember being between the stone ceiling and a cold floor. You remember your first sunlight yesterday. You don&#39;t really know anything else. 
 
 You grin towards the soldier. 
 
 [[Nevermind it. Let&#39;s keep going. | Chapter1P6]]
-[[Do *you* know anything, maybe? | Chapter1P5-A3][$closeness to $closeness+1]]</tw-passagedata><tw-passagedata pid="15" name="Chapter1P5-A3" tags="" position="600,225" size="100,100">&lt;!--CLOSENESS CHECK!--&gt;
+[[✰ Do *you* know anything, maybe? | Chapter1P5-A3][$closeness to $closeness+1]]</tw-passagedata><tw-passagedata pid="15" name="Chapter1P5-A3" tags="" position="675,775" size="100,100">&lt;!--CLOSENESS CHECK!--&gt;
 &lt;!--(if greater than equal 4)--&gt;
 
 &lt;&lt;if $closeness gte 4&gt;&gt; 
 
 (check successful)
+    &lt;&lt;silently&gt;&gt; 
+        &lt;&lt;set $checkAmount to $checkAmount+1&gt;&gt; 
+        &lt;&lt;set $descYou to &quot;You are a Prince of Rhodolite, captured in the middle of a diplomatic mission. You don&#39;t really remember what they&#39;ve done to you, or anything, really.&quot;&gt;&gt;
+        &lt;&lt;set $descSoldier to &quot;An Obsidian soldier tasked to carry out the prisoners exchange. He might be hiding something from you.&quot; &gt;&gt;
+    &lt;&lt;/silently&gt;&gt;
 
 The soldier frowns, his gaze turns towards the ground. 
 
@@ -210,6 +279,8 @@ You can&#39;t see his face. There seems to be a lump in his throat that prevents
 There is definitely something that he knows. But you won&#39;t blame him too much for hiding. 
 
     &lt;&lt;else&gt;&gt; 
+
+(check failed)
     
 The soldier frowns, his gaze turns towards the ground. 
 
@@ -219,14 +290,14 @@ You can&#39;t see his face. But he shakes his head.
 
  &lt;&lt;/if&gt;&gt;
 
-[[Walk. | Chapter1P6]]</tw-passagedata><tw-passagedata pid="16" name="Chapter1P6" tags="" position="725,225" size="100,100">He took one last look at you before continuing. 
+[[Walk. | Chapter1P6]]</tw-passagedata><tw-passagedata pid="16" name="Chapter1P6" tags="" position="500,925" size="100,100">He took one last look at you before continuing. 
 
 $Adam carries a fistful of herbs in his hands now. He’s holding on to it real tight like it’s the only thing that could save him. You watch him skillfully tie all the stems up into one bale with a string.
 
-[[Walk. | Chapter1P7]]</tw-passagedata><tw-passagedata pid="17" name="Chapter1P7" tags="" position="850,225" size="100,100">$Adam took a short detour to the right to dig up some more off the ground. Now, you&#39;re almost unable to contain your curiosity. 
+[[Walk. | Chapter1P7]]</tw-passagedata><tw-passagedata pid="17" name="Chapter1P7" tags="" position="625,925" size="100,100">$Adam took a short detour to the right to dig up some more off the ground. Now, you&#39;re almost unable to contain your curiosity. 
 
 [[What is it for? | Chapter1P7-A][$closeness to $closeness+1]]
-[[Just keep on walking, dammit. | Chapter1P8]]</tw-passagedata><tw-passagedata pid="18" name="Chapter1P7-A" tags="" position="975,225" size="100,100">You point to the herbs.
+[[Just keep on walking, dammit. | Chapter1P8]]</tw-passagedata><tw-passagedata pid="18" name="Chapter1P7-A" tags="" position="350,1075" size="100,100">You point to the herbs.
 
 “It’s for drinking,&quot; he said. 
 
@@ -237,26 +308,26 @@ He seems confused that you&#39;re asking all this all of a sudden. Perhaps becau
 &quot;Just want to talk… Are you told not to do that?&quot; You chuckle. &quot;I don&#39;t bite. I&#39;m barely awake as it is.&quot;
 
 [[&quot;Do you deliver prisoners often?&quot; | Chapter1P7-A1][$closeness to $closeness+1]]
-[[Better stop talking before you say something ridiculous. |  Chapter1P8]]</tw-passagedata><tw-passagedata pid="19" name="Chapter1P7-A1" tags="" position="1100,225" size="100,100">&quot;Because I&#39;m not… going to be your run-of-the-mill. I&#39;ve never fought a single fight in my life.&quot; 
+[[Better stop talking before you say something ridiculous. |  Chapter1P8]]</tw-passagedata><tw-passagedata pid="19" name="Chapter1P7-A1" tags="" position="475,1075" size="100,100">&quot;Because I&#39;m not… going to be your run-of-the-mill. I&#39;ve never fought a single fight in my life.&quot; 
 
 It&#39;s half true. There&#39;s a reason you end up here in the first place. 
 
 &quot;I&#39;m just looking to know what&#39;s going on. I&#39;ll be as docile as I can. It&#39;s quite hopeless trying to run away here isn&#39;t it.&quot; You look around you, watching the blades of grass stabbing through the earth below your boots.
  
-[[So, you can just chill around me. |  Chapter1P7-A2]]</tw-passagedata><tw-passagedata pid="20" name="Chapter1P7-A2" tags="" position="1225,225" size="100,100">&quot;No. Not often. This is the first time.&quot; He said. 
+[[So, you can just chill around me. |  Chapter1P7-A2]]</tw-passagedata><tw-passagedata pid="20" name="Chapter1P7-A2" tags="" position="600,1075" size="100,100">&quot;No. Not often. This is the first time.&quot; He said. 
 
 Quite to the point. He ignored everything else that you just said. 
 
 &quot;Alright, fine. So you&#39;re not looking for trouble. Good luck for your first time.&quot;
 
-[[That&#39;s ridiculous, what you just said. | Chapter1P8]]</tw-passagedata><tw-passagedata pid="21" name="Chapter1P8" tags="" position="100,350" size="100,100">&quot;We have to be quick.&quot; $Adam widened his strides. He rights up his backpack and stomps the ground more confidently. He hugs his rifle close to his shoulder. &quot;This is not a safe area.&quot;
+[[That&#39;s ridiculous, what you just said. | Chapter1P8]]</tw-passagedata><tw-passagedata pid="21" name="Chapter1P8" tags="" position="500,1225" size="100,100">&quot;We have to be quick.&quot; $Adam widened his strides. He rights up his backpack and stomps the ground more confidently. He hugs his rifle close to his shoulder. &quot;This is not a safe area.&quot;
 
 &quot;Could&#39;ve told me that a minute ago!&quot; You ran to catch up with him. &quot;What&#39;s the danger?&quot; 
 
 He looks at you incredulously once more. 
 
 [[What? Call me stupid, but I need to know. | Chapter1P8-A][$closeness to $closeness+1]] 
-[[Alright, then I&#39;m not going to ask. | Chapter1P9]]</tw-passagedata><tw-passagedata pid="22" name="Chapter1P8-A" tags="" position="225,350" size="100,100">&quot;There&#39;s nowhere to hide. Anyone can see us easily.&quot;
+[[Alright, then I&#39;m not going to ask. | Chapter1P9]]</tw-passagedata><tw-passagedata pid="22" name="Chapter1P8-A" tags="" position="400,1375" size="100,100">&quot;There&#39;s nowhere to hide. Anyone can see us easily.&quot;
 
 You walk closer to him to whisper, &quot;What does anyone want from us?&quot; 
 
@@ -268,7 +339,7 @@ He doesn&#39;t answer. There&#39;s that lump in his throat again.
 
 Something is really tearing him up inside, but you can&#39;t tell what. 
 
-[[Walk. | Chapter1P9]]</tw-passagedata><tw-passagedata pid="23" name="Chapter1P9" tags="" position="350,350" size="100,100">&quot;No matter what, we get up that hill.&quot;
+[[Walk. | Chapter1P9]]</tw-passagedata><tw-passagedata pid="23" name="Chapter1P9" tags="" position="575,1375" size="100,100">&quot;No matter what, we get up that hill.&quot;
 
 $Adam points towards a hump in the land that is barely a hill. But at least it&#39;s something different. 
 
@@ -276,61 +347,49 @@ $Adam points towards a hump in the land that is barely a hill. But at least it&#
 
 You wrap your blanket tighter around you. Just one slip and it might get flown off by the wind, and if that happens, good luck trying to differentiate it from the grass. 
 
-[[Walk. | Chapter1P10]]</tw-passagedata><tw-passagedata pid="24" name="Chapter1P10" tags="" position="475,350" size="100,100">This wool is just really really terrible isn&#39;t it. Sticking it over hay had just made it worse. 
+[[Walk. | Chapter1P10]]</tw-passagedata><tw-passagedata pid="24" name="Chapter1P10" tags="" position="500,1525" size="100,100">This wool is just really really terrible isn&#39;t it. Sticking it over hay had just made it worse. 
 
-[[Walk. | Chapter1P11]]</tw-passagedata><tw-passagedata pid="25" name="Chapter1P11" tags="" position="600,350" size="100,100">You really need a coat. And maybe some more rest. 
+[[Walk. | Chapter1P11]]</tw-passagedata><tw-passagedata pid="25" name="Chapter1P11" tags="" position="625,1525" size="100,100">You really need a coat. And maybe some more rest. 
 
-[[Walk. | Chapter1P12]]</tw-passagedata><tw-passagedata pid="26" name="Chapter1P12" tags="" position="725,350" size="100,100">The hill just gets further and further away. 
+[[Walk. | Chapter1P12]]</tw-passagedata><tw-passagedata pid="26" name="Chapter1P12" tags="" position="750,1525" size="100,100">The hill just gets further and further away. 
 
-[[Walk. | Chapter2]]</tw-passagedata><tw-passagedata pid="27" name="Chapter2" tags="" position="850,350" size="100,100">&lt;center&gt;&lt;h1&gt;CHAPTER 2&lt;/h1&gt;&lt;/center&gt; 
+[[Walk. | Chapter2]]</tw-passagedata><tw-passagedata pid="27" name="Chapter2" tags="" position="500,1700" size="100,100">&lt;center&gt;&lt;h1&gt;CHAPTER 2&lt;/h1&gt;&lt;/center&gt; 
 &lt;!--max points here is 7--&gt;
-Your points: $closeness
+Closeness: $closeness
+Passed $checkAmount out of 1 check(s). 
 Keep being curious, by everything and everyone, no matter what. 
+&lt;&lt;silently&gt;&gt;
+
+    &lt;&lt;set $statusYou to &quot;cold&quot;&gt;&gt;
+
+&lt;&lt;/silently&gt;&gt;
+Profile updated.
 
 
+&lt;&lt;if $checkAmount lte 0&gt;&gt; &lt;span class=&quot;hints&quot;&gt;Hint: failing a check means you didn&#39;t earn enough closeness to see new information.&lt;/span&gt;
+&lt;&lt;elseif $checkAmount gte 1&gt;&gt; &lt;span class=&quot;hints&quot;&gt;Hint: passing a check means you earned enough closeness to see new information.&lt;/span&gt; &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;if $closeness gte 4&gt;&gt; 
-
-Profile updated. 
-
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;set $statusYou to &quot;cold&quot;&gt;&gt;
-
-[[Begin.]]</tw-passagedata><tw-passagedata pid="28" name="StoryBanner" tags="" position="975,350" size="100,100">&lt;!--&lt;img src=&quot;nokto sprite.png&quot; style=&quot;width: 250px&quot;&gt;--&gt;</tw-passagedata><tw-passagedata pid="29" name="StorySubtitle" tags="" position="1100,350" size="100,100"></tw-passagedata><tw-passagedata pid="30" name="StoryAuthor" tags="" position="1225,350" size="100,100">by [[Devon R|https://batteryrose.tumblr.com/]]</tw-passagedata><tw-passagedata pid="31" name="StoryCaption" tags="" position="100,475" size="100,100"></tw-passagedata><tw-passagedata pid="32" name="StoryMenu" tags="" position="225,475" size="100,100"></tw-passagedata><tw-passagedata pid="33" name="PassageFooter" tags="" position="350,475" size="100,100">&lt;div id=&quot;passage-footer&quot;&gt;
+Begin. (coming soon)</tw-passagedata><tw-passagedata pid="28" name="StoryBanner" tags="" position="0,900" size="100,100">&lt;!--&lt;img src=&quot;nokto sprite.png&quot; style=&quot;width: 250px&quot;&gt;--&gt;</tw-passagedata><tw-passagedata pid="29" name="StorySubtitle" tags="" position="0,600" size="100,100"></tw-passagedata><tw-passagedata pid="30" name="StoryAuthor" tags="" position="0,700" size="100,100">by [[Devon R|https://batteryrose.tumblr.com/]]</tw-passagedata><tw-passagedata pid="31" name="StoryCaption" tags="" position="0,800" size="100,100"></tw-passagedata><tw-passagedata pid="32" name="StoryMenu" tags="" position="0,1100" size="100,100"></tw-passagedata><tw-passagedata pid="33" name="PassageFooter" tags="" position="0,200" size="100,100">&lt;div id=&quot;passage-footer&quot;&gt;
 &lt;hr&gt;
 [[You | Profile Page]]
 [[&quot;&quot; + $Adam | Soldier&#39;s Profile]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="34" name="PassageHeader" tags="" position="475,475" size="100,100"></tw-passagedata><tw-passagedata pid="35" name="StoryInit" tags="" position="600,475" size="100,100">&lt;!-- your starting variable --&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="34" name="PassageHeader" tags="" position="0,100" size="100,100"></tw-passagedata><tw-passagedata pid="35" name="StoryInit" tags="" position="600,475" size="100,100">&lt;&lt;preload &quot;nokto sprite.png&quot; &quot;adam sprite.png&quot;&gt;&gt;
+&lt;!-- your starting variable --&gt;
 &lt;&lt;set $closeness to 0&gt;&gt;
+&lt;&lt;set $checkAmount to 0&gt;&gt;
 &lt;&lt;set $statusYou to &quot;getting by&quot;&gt;&gt;
 &lt;&lt;set $statusSoldier to &quot;getting by&quot;&gt;&gt;
-&lt;&lt;set $Adam to &quot;The Soldier&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Profile Page" tags="noreturn" position="725,475" size="100,100">&lt;img src=&quot;nokto sprite.png&quot;&gt;
+&lt;&lt;set $Adam to &quot;the Soldier&quot;&gt;&gt;
+&lt;&lt;set $descYou to &quot;You are a Prince of Rhodolite, captured in the middle of a diplomatic mission.&quot;&gt;&gt;
+&lt;&lt;set $descSoldier to &quot;An Obsidian soldier tasked to carry out the prisoners exchange.&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Profile Page" tags="noreturn" position="0,375" size="100,100">&lt;img src=&quot;nokto sprite.png&quot;&gt;
 
-&lt;&lt;if $closeness gte 4&gt;&gt; 
-
-You are a Prince of Rhodolite, captured in the middle of a diplomatic mission. You don&#39;t really remember what they&#39;ve done to you, or anything, really.
-
-&lt;&lt;else&gt;&gt;
-
-You are a Prince of Rhodolite, captured in the middle of a diplomatic mission.
-
-&lt;&lt;/if&gt;&gt;
-
+$descYou
 
 Status: $statusYou.
 
-&lt;&lt;link &quot;Return&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Soldier&#39;s Profile" tags="noreturn" position="850,475" size="100,100">&lt;img src=&quot;adam sprite.png&quot;&gt;
+&lt;&lt;link &quot;Return&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Soldier&#39;s Profile" tags="noreturn" position="100,375" size="100,100">&lt;img src=&quot;adam sprite.png&quot;&gt;
 
-&lt;&lt;if $closeness gte 4&gt;&gt; 
-
-An Obsidian soldier tasked to carry out the prisoners exchange. He might be hiding something from you.
-
-&lt;&lt;else&gt;&gt;
-
-An Obsidian soldier tasked to carry out the prisoners exchange.
-
-&lt;&lt;/if&gt;&gt;
+$descSoldier
 
 Status: $statusSoldier.
 

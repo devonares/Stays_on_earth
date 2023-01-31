@@ -1,9 +1,9 @@
-:: Start
+:: Start {"position":"500,0"}
 You are a prisoner being transferred back to your home kingdom. A lone soldier is assigned to make sure you reach your destination.
 
 [[Begin. | Prologue]]
 
-:: Prologue
+:: Prologue {"position":"500,175"}
 You wake—
 
 To pitch black darkness and rough woollen bed sheets. Your face itches. Your head of hair seems indistinguishable from the pile of straw underneath. 
@@ -12,14 +12,14 @@ The tent above you sways in the young winter wind.
 
 [[Look around. | PrologueP2]]
 
-:: PrologueP2
+:: PrologueP2 {"position":"600,175"}
 
 A man sat facing the tent opening, watching it flap around in the breeze. His grey coat is covering his head. The muzzle of his musket rifle peeks from his shoulder as he is hugging it close.
 
 [[...Is he sleeping? | PrologueP2-A][$closeness to $closeness+1]]
 [[Forget it. | PrologueP3]]
 
-:: PrologueP2-A
+:: PrologueP2-A {"position":"500,325"}
 
 You poked the soldier’s back. Of course he is not sleeping. He turns around and stares at you inquisitively.
 
@@ -29,18 +29,18 @@ He watches your gestures. He peeks outside the tent opening and shows you the sk
 
 [[Wait. Is it really? | PrologueP3]]
 
-:: PrologueP3
+:: PrologueP3 {"position":"675,325"}
 
 You crawl past the soldier, desperate to look outside. A blast of cold wind hits your face and wouldn’t you know it, gradients of red and yellow paint the sky above the massive grassland. It is almost morning.
 
 [[What happens on earth, stays on earth. | Chapter1]]
 
-:: Chapter1
+:: Chapter1 {"position":"500,475"}
 <center><h1>Chapter 1</h1></center>
 
 [[Begin. | Chapter1P1]]
 
-:: Chapter1P1
+:: Chapter1P1 {"position":"275,625"}
 
 The soldier skillfully disassembled the military tent, tied the materials all up into one bundle.
 
@@ -50,7 +50,7 @@ You wrap around the scratchy woollen blanket around you. You are ready to go.
 
 [[Look around. | Chapter1P2]]
 
-:: Chapter1P2
+:: Chapter1P2 {"position":"400,625"}
 
 Just a dry, vast steppe. Nothing but weeds and dull coloured hills as far as the eyes can see. You’ve walked a day on it and you’ve seen it all. But it’s not even a quarter of the journey.
 
@@ -58,7 +58,7 @@ Wind sweeps brazenly through the blades of grass.
 
 [[It’s terrible. | Chapter1P3]]
 
-:: Chapter1P3
+:: Chapter1P3 {"position":"525,625"}
 
 Chills went through your body. You probably won’t last long without a proper coat. The wind has nothing to catch itself on, so it could almost blow you off your feet. 
 
@@ -66,13 +66,13 @@ Looking up, the steppe is truly waving. The herbs growing around the land gives 
 
 [[Walk. | Chapter1P4]]
 
-:: Chapter1P4
+:: Chapter1P4 {"position":"650,625"}
 
 The ground groaned against our feet. The sun is rising from the horizon. We are heading east, always east. East to the small kingdom of Rhodolite.
 
 [[Walk. | Chapter1P5]]
 
-:: Chapter1P5
+:: Chapter1P5 {"position":"775,625"}
 
 It’s lonely out here. Even though you’ve been given your company.
 
@@ -83,7 +83,7 @@ The soldier is most likely not an Obsidianite. Darker skin, eyes. He’s one of 
 [[Ask about his name. | Chapter1P5-A][$closeness to $closeness+1]]
 [[Should let him do his thing. | Chapter1P6]]
 
-:: Chapter1P5-A
+:: Chapter1P5-A {"position":"300,775"}
 
 Yes, you never caught his name. And since you were first thrown out into this— what seems to effectively be a— purgatory, you never really thought to ask about that stuff.
 
@@ -99,7 +99,7 @@ You nod.
 <!--(Change the profile text from ‘the soldier’ to ‘Adam.’)-->
 <<set $Adam to "Adam">>
 
-:: Chapter1P5-A1
+:: Chapter1P5-A1 {"position":"425,775"}
 
 “Adam, where are you from?”
 
@@ -109,10 +109,10 @@ You sigh. "Yeah, sorry. I'm missing a lot of things right now. You'd have to bea
 
 For a moment he stopped, and looked at you. 
 
-[[Bit disoriented. But it's all good. | Chapter1P5-A2]]
-[[I don't remember anything.| Chapter1P5-A2][$closeness to $closeness+1]]
+[[Bit disoriented. But it's all good. | Chapter1P6]]
+[[(be honest) I don't remember anything.| Chapter1P5-A2][$closeness to $closeness+1]]
 
-:: Chapter1P5-A2
+:: Chapter1P5-A2 {"position":"550,775"}
 
 You drop your face into your hand. You've been out here for a whole day, yet you're still all over the place. Whenever you try a little at remembering, you remember a little of—
 
@@ -121,9 +121,9 @@ being held inside a dark room for weeks, maybe months, maybe longer. You remembe
 You grin towards the soldier. 
 
 [[Nevermind it. Let's keep going. | Chapter1P6]]
-[[Do *you* know anything, maybe? | Chapter1P5-A3][$closeness to $closeness+1]] 
+[[✰ Do *you* know anything, maybe? | Chapter1P5-A3][$closeness to $closeness+1]] 
 
-:: Chapter1P5-A3
+:: Chapter1P5-A3 {"position":"675,775"}
 
 <!--CLOSENESS CHECK!-->
 <!--(if greater than equal 4)-->
@@ -131,6 +131,11 @@ You grin towards the soldier.
 <<if $closeness gte 4>> 
 
 (check successful)
+    <<silently>> 
+        <<set $checkAmount to $checkAmount+1>> 
+        <<set $descYou to "You are a Prince of Rhodolite, captured in the middle of a diplomatic mission. You don't really remember what they've done to you, or anything, really.">>
+        <<set $descSoldier to "An Obsidian soldier tasked to carry out the prisoners exchange. He might be hiding something from you." >>
+    <</silently>>
 
 The soldier frowns, his gaze turns towards the ground. 
 
@@ -141,6 +146,8 @@ You can't see his face. There seems to be a lump in his throat that prevents him
 There is definitely something that he knows. But you won't blame him too much for hiding. 
 
     <<else>> 
+
+(check failed)
     
 The soldier frowns, his gaze turns towards the ground. 
 
@@ -152,7 +159,7 @@ You can't see his face. But he shakes his head.
 
 [[Walk. | Chapter1P6]]
 
-:: Chapter1P6
+:: Chapter1P6 {"position":"500,925"}
 
 He took one last look at you before continuing. 
 
@@ -160,14 +167,14 @@ $Adam carries a fistful of herbs in his hands now. He’s holding on to it real 
 
 [[Walk. | Chapter1P7]]
 
-:: Chapter1P7
+:: Chapter1P7 {"position":"625,925"}
 
 $Adam took a short detour to the right to dig up some more off the ground. Now, you're almost unable to contain your curiosity. 
 
 [[What is it for? | Chapter1P7-A][$closeness to $closeness+1]]
 [[Just keep on walking, dammit. | Chapter1P8]]
 
-:: Chapter1P7-A
+:: Chapter1P7-A {"position":"350,1075"}
 
 You point to the herbs.
 
@@ -182,7 +189,7 @@ He seems confused that you're asking all this all of a sudden. Perhaps because y
 [["Do you deliver prisoners often?" | Chapter1P7-A1][$closeness to $closeness+1]]
 [[Better stop talking before you say something ridiculous. |  Chapter1P8]]
 
-::  Chapter1P7-A1
+:: Chapter1P7-A1 {"position":"475,1075"}
 
 "Because I'm not… going to be your run-of-the-mill. I've never fought a single fight in my life." 
 
@@ -192,7 +199,7 @@ It's half true. There's a reason you end up here in the first place.
  
 [[So, you can just chill around me. |  Chapter1P7-A2]] 
 
-:: Chapter1P7-A2
+:: Chapter1P7-A2 {"position":"600,1075"}
 
 "No. Not often. This is the first time." He said. 
 
@@ -202,7 +209,7 @@ Quite to the point. He ignored everything else that you just said.
 
 [[That's ridiculous, what you just said. | Chapter1P8]]
 
-:: Chapter1P8
+:: Chapter1P8 {"position":"500,1225"}
 
 "We have to be quick." $Adam widened his strides. He rights up his backpack and stomps the ground more confidently. He hugs his rifle close to his shoulder. "This is not a safe area."
 
@@ -213,7 +220,7 @@ He looks at you incredulously once more.
 [[What? Call me stupid, but I need to know. | Chapter1P8-A][$closeness to $closeness+1]] 
 [[Alright, then I'm not going to ask. | Chapter1P9]]
 
-:: Chapter1P8-A
+:: Chapter1P8-A {"position":"400,1375"}
 
 "There's nowhere to hide. Anyone can see us easily."
 
@@ -229,7 +236,7 @@ Something is really tearing him up inside, but you can't tell what.
 
 [[Walk. | Chapter1P9]]
 
-:: Chapter1P9
+:: Chapter1P9 {"position":"575,1375"}
 
 "No matter what, we get up that hill."
 
@@ -241,39 +248,40 @@ You wrap your blanket tighter around you. Just one slip and it might get flown o
 
 [[Walk. | Chapter1P10]] 
 
-:: Chapter1P10
+:: Chapter1P10 {"position":"500,1525"}
 
 This wool is just really really terrible isn't it. Sticking it over hay had just made it worse. 
 
 [[Walk. | Chapter1P11]]
 
-:: Chapter1P11
+:: Chapter1P11 {"position":"625,1525"}
 
 You really need a coat. And maybe some more rest. 
 
 [[Walk. | Chapter1P12]]
 
-:: Chapter1P12
+:: Chapter1P12 {"position":"750,1525"}
 
 The hill just gets further and further away. 
 
 [[Walk. | Chapter2]]
 
-:: Chapter2
+:: Chapter2 {"position":"500,1700"}
 
 <center><h1>CHAPTER 2</h1></center> 
 <!--max points here is 7-->
-Your points: $closeness
+Closeness: $closeness
+Passed $checkAmount out of 1 check(s). 
 Keep being curious, by everything and everyone, no matter what. 
+<<silently>>
+
+    <<set $statusYou to "cold">>
+
+<</silently>>
+Profile updated.
 
 
+<<if $checkAmount lte 0>> <span class="hints">Hint: failing a check means you didn't earn enough closeness to see new information.</span>
+<<elseif $checkAmount gte 1>> <span class="hints">Hint: passing a check means you earned enough closeness to see new information.</span> <</if>>
 
-<<if $closeness gte 4>> 
-
-Profile updated. 
-
-<</if>>
-
-<<set $statusYou to "cold">>
-
-[[Begin.]]
+Begin. (coming soon)

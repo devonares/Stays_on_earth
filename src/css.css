@@ -14,3 +14,7 @@ body {
 .passage {
     font-size: large;
 }
+
+.hints {
+    color: rgb(158, 158, 158);
+}
