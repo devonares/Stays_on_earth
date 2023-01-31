@@ -1,3 +1,11 @@
+<!--TODO:
+1. Use github actions to deploy.
+2. Change profile desc to a variable so it's easier to change
+3. Fix one of the branching mistakes (when Nokto says 'i dont remember anything')
+4. Write chapter two
+-->
+
+
 :: StoryTitle
 what happens on earth, stays on earth
 
